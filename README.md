@@ -1,4 +1,4 @@
-# Data Analysis Portfolio Website
+# My Data Analysis Portfolio Website
 
 This website is a showcase of my data analysis projects, demonstrating skills in **Excel**, **SQL**, **Tableau** and **Python** . Each project involves **data cleaning**, **exploration**, **analysis**, and **visualisations**, with a focus on delivering insights through efficient coding and interactive dashboards. Please navigate these projects directly through my [website](https://nirosan-v.github.io/-NirosanVijayakumar.github.io/).
 
