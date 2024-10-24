@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Nirosan Vijayakumar | SQL - Data Cleaning: World Layoff</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<div id="wrapper" class="fade-in">
+					<!-- Header -->
+					<div id="copyright">
+						<ul></ul>
+					</div>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="excel.html">Excel</a></li>
+                            <li class="active"><a href="sql.html">SQL</a></li>
+                            <li><a href="tableau.html">Tableau</a></li>
+                            <li><a href="python.html">Python</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/tree/main" class="icon brands fa-github" target="_blank" rel="noopener noreferrer"><span class="label">GitHub</span></a></li>
+							<li><a href="https://www.linkedin.com/in/nirosan-v/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+                                    <h1><span style="font-size: 0.85em;">DATA CLEANING</span> - <br />									
+									World Layoff Data</h1>
+                                    <p style="text-align: left;"> <strong> Data Set:</strong> <a href="https://github.com/AlexTheAnalyst/MySQL-YouTube-Series/blob/main/layoffs.csv" target="_blank" rel="noopener noreferrer">Press Here</a> <br>
+										<strong>GitHub File:</strong> <a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/blob/main/SQL/data_cleaning_layoff_data.sql" target="_blank" rel="noopener noreferrer">Press Here</a> </p>
+                                    <p style="text-align: left;">
+                                        <strong><u>Overview:</u></strong><br>
+                                        This project focuses on cleaning and preparing world layoff data using SQL. The goal is to structure and standardise the data for better analysis and insights. The project demonstrates various SQL techniques for data manipulation and cleaning, including removing duplicates, standardising formats, and handling null values.<br><br>
+                    
+                                        <strong><u>Key Skills Used:</u></strong><br>
+                                        • <strong>Data Cleaning:</strong> Removing duplicates, trimming whitespace, standardising values<br>
+                                        • <strong>Data Analysis:</strong> Using SQL functions like <strong>ROW_NUMBER</strong>, <strong>JOIN</strong>, and <strong>CASE</strong> statements<br>
+                                        • <strong>Data Structuring:</strong> Creating staging tables and cleaned datasets<br><br>
+                    
+                                        <strong><u>Dataset Description:</u></strong><br>
+                                        The dataset consists of layoff data with fields such as company, location, industry, and total laid-off employees. It contains inconsistencies, such as duplicate rows and varying formats, which are addressed in this project.<br><br>
+                    
+                                        <strong><u>Why This Project is Worth Doing:</u></strong><br>
+                                        • This project provides hands-on experience in using SQL for data cleaning, a crucial skill for data analysts.<br>
+                                        • It allows for practice in applying SQL functions to manipulate and analyse data effectively.<br>
+                                        • The project emphasises the importance of clean data for accurate analysis and reporting.<br><br>
+                    
+                                        <strong><u>Step-by-Step Guide for Data Cleaning:</u></strong>
+                                        <ol style="text-align: left">
+                                            <li><strong>Creating a Staged Data Table:</strong> 
+                                                <pre><code>SELECT * FROM layoffs_raw;</code></pre>
+                                                <pre><code>CREATE TABLE layoffs_staging LIKE layoffs_raw;</code></pre>
+                                            </li>
+                                            <li><strong>Copying Data:</strong> 
+                                                <pre><code>INSERT INTO layoffs_staging SELECT * FROM layoffs_raw;</code></pre>
+                                            </li>
+                                            <li><strong>Removing Duplicates:</strong> 
+                                                <pre><code>SELECT *, ROW_NUMBER() OVER (PARTITION BY company, location, industry, total_laid_off, percentage_laid_off, date) AS row_num FROM layoffs_staging;</code></pre>
+                                                <pre><code>DELETE FROM layoffs_cleaned WHERE row_num > 1;</code></pre>
+                                            </li>
+                                            <li><strong>Standardising Data:</strong> 
+                                                <pre><code>UPDATE layoffs_cleaned SET company = TRIM(company);</code></pre>
+                                                <pre><code>UPDATE layoffs_cleaned SET industry = "Crypto" WHERE industry LIKE "Crypto%";</code></pre>
+                                            </li>
+                                            <li><strong>Fixing Date Formats:</strong> 
+                                                <pre><code>UPDATE layoffs_cleaned SET date = STR_TO_DATE(date, "%m/%d/%Y");</code></pre>
+                                            </li>
+                                            <li><strong>Handling Null Values:</strong> 
+                                                <pre><code>UPDATE layoffs_cleaned SET industry = NULL WHERE industry = "";</code></pre>
+                                            </li>
+                                            <li><strong>Removing Unnecessary Columns:</strong> 
+                                                <pre><code>ALTER TABLE layoffs_cleaned DROP COLUMN row_num;</code></pre>
+                                            </li>
+                                            <li><strong>Final Check:</strong> 
+                                                <pre><code>SELECT * FROM layoffs_cleaned;</code></pre>
+                                            </li>
+                                        </ol>
+										<strong><u>Initial Table:</u></strong><br>
+                                        <img src="sql_layoffs_before.jpeg" alt="SQL Data Cleaning Raw" style="max-width: 100%; height: auto;">    
+                                        <strong><u>Final Result:</u></strong><br>
+                                        <img src="sql_layoffs_clean.jpeg" alt="SQL Data Cleaning Result" style="max-width: 100%; height: auto;">
+										</p>
+										<p style="text-align:left;">
+											<strong><u>CONCLUDING REMARKS</u></strong><br>
+											This project significantly enhanced my proficiency with <strong>SQL-based data cleaning</strong>, particularly in handling complex datasets. Working with real-world data issues, such as duplicates and inconsistent formats, reinforced the importance of clean data in delivering <strong>accurate analysis</strong>. Furthermore, the use of <strong>SQL functions</strong> like <strong>ROW_NUMBER</strong> and <strong>JOIN</strong> to standardise and structure data improved my ability to build <strong>efficient queries</strong>. These techniques, essential for ensuring data quality, will undoubtedly serve as a foundation for deeper <strong>data insights</strong> in future analytical tasks. The final dataset is now ready for <a href="sql_layoffs_eda.html" target="_blank" rel="noopener noreferrer">exploratory data analysis.</a>
+										</p>
+                                    </p>                                                   
+                                    </p>
+								</section>
+
+					</div>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<section class="split contact">
+						<section class="alt">
+							<h3>Email</h3>
+							<p><a href="mailto:nirosan.vijayakumar@icloud.com">nirosan.vijayakumar@icloud.com<br><br></a></p>								
+						</section>
+						<section>
+							<h3>Phone</h3>
+							<p><a href="tel:+447930085562">+44 7930 085562</a></p>
+						</section>							
+					</section>
+					<section class="split contact">
+						<section class="alt">								
+							<h3>Address</h3>
+							<p>London,<br />
+							United Kingdom</p>
+						</section>
+						<section>
+							<h3>Socials</h3>
+							<ul class="icons alt">
+								<li><a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/tree/main" class="icon brands alt fa-github" target="_blank" rel="noopener noreferrer"><span class="label">GitHub</span></a></li>
+								<li><a href="https://www.linkedin.com/in/nirosan-v/" class="icon brands alt fa-linkedin" target="_blank" rel="noopener noreferrer"><span class="label">LinkedIn</span></a></li>
+							</ul>
+						</section>
+					</section>
+				</footer>
+
+			<!-- Copyright -->
+				<div id="copyright">
+					<ul><li> Nirosan Vijayakumar</li><li>Design adapted from: <a href="https://html5up.net" target="_blank" rel="noopener noreferrer">HTML5 UP</a></li></ul>
+				</div>
+
+		</div>
+
+	<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+</body>
+</html>

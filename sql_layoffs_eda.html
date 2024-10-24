@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Nirosan Vijayakumar | SQL - Exploratory Data Analysis: World Layoff</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<div id="wrapper" class="fade-in">
+					<!-- Header -->
+					<div id="copyright">
+						<ul></ul>
+					</div>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="excel.html">Excel</a></li>
+                            <li class="active"><a href="sql.html">SQL</a></li>
+                            <li><a href="tableau.html">Tableau</a></li>
+                            <li><a href="python.html">Python</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/tree/main" class="icon brands fa-github" target="_blank" rel="noopener noreferrer"><span class="label">GitHub</span></a></li>
+							<li><a href="https://www.linkedin.com/in/nirosan-v/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+                                    <h1><span style="font-size: 0.85em;">Exploratory Data Analysis</Data></span> - <br />									
+									World Layoff Data</h1>
+                                    <p style="text-align: left;"> <strong> Data Set:</strong> <a href="https://github.com/AlexTheAnalyst/MySQL-YouTube-Series/blob/main/layoffs.csv" target="_blank" rel="noopener noreferrer">Press Here</a> <br>
+										<strong>GitHub File:</strong> <a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/blob/main/SQL/exploratory_data_analysis_layoff_data.sql" target="_blank" rel="noopener noreferrer">Press Here</a> </p>
+                                        <p style="text-align: left;"><strong><u>Overview:</u></strong><br>
+                                        This project focuses on exploratory data analysis of layoff data using SQL. The aim is to identify trends and insights regarding layoffs across various companies and industries. The project utilises various SQL techniques for data manipulation, analysis, and reporting, providing valuable insights into workforce reductions.<br><br>
+                    
+                                        <strong><u>Key Skills Used:</u></strong><br>
+                                        • <strong>Data Analysis:</strong> Querying and manipulating data using <strong>SELECT</strong>, <strong>GROUP BY</strong>, and <strong>ORDER BY</strong> statements<br>
+                                        • <strong>Data Transformation:</strong> Using <strong>ALTER TABLE</strong> and data type conversion<br>
+                                        • <strong>Trend Analysis:</strong> Identifying trends over time with <strong>ROLLING TOTALS</strong> and aggregation functions<br><br>
+                    
+                                        <strong><u>Dataset Description:</u></strong><br>
+                                        The dataset consists of layoff data with fields such as company, location, industry, total laid-off employees, and percentage laid off. It contains various inconsistencies and requires transformation for effective analysis.<br><br>
+                    
+                                        <strong><u>Why This Project is Worth Doing:</u></strong><br>
+                                        • Exploratory Data Analysis (EDA) helps uncover insights, patterns, and trends in the data, guiding further analysis and decision-making.<br>
+                                        • It highlights the importance of understanding data structure and quality before proceeding to modeling or formal statistical analysis.<br>
+                                        • The project highlights the importance of clean, structured data for accurate analysis.<br><br>
+                    
+                                        <strong><u>Step-by-Step Guide for Exploratory Data Analysis:</u></strong>
+                                        <ol style="text-align: left;">
+                                            <li><strong>Selecting All Records:</strong> 
+                                                <pre><code>SELECT * FROM layoffs_cleaned;</code></pre>
+                                            </li>
+                                            <li><strong>Convert Columns to Appropriate Data Types:</strong> 
+                                                <pre><code>ALTER TABLE layoffs_cleaned MODIFY COLUMN total_laid_off INT;</code></pre>
+                                            </li>
+                                            <li><strong>Retrieve Maximum Values:</strong> 
+                                                <pre><code>SELECT MAX(total_laid_off), MAX(percentage_laid_off) FROM layoffs_cleaned;</code></pre>
+                                            </li>
+                                            <li><strong>Identify Companies with 100% Layoffs:</strong> 
+                                                <pre><code>SELECT * FROM layoffs_cleaned WHERE percentage_laid_off = 1 ORDER BY total_laid_off DESC;</code></pre>
+                                            </li>
+                                            <li><strong>Group Total Layoffs by Company:</strong> 
+                                                <pre><code>SELECT company, SUM(total_laid_off) AS total_laid_off FROM layoffs_cleaned GROUP BY company ORDER BY total_laid_off DESC;</code></pre>
+                                            </li>
+                                            <li><strong>Group Total Layoffs by Industry:</strong> 
+                                                <pre><code>SELECT industry, SUM(total_laid_off) AS total_laid_off FROM layoffs_cleaned GROUP BY industry ORDER BY total_laid_off DESC;</code></pre>
+                                            </li>
+                                            <li><strong>Group Total Layoffs by Year:</strong> 
+                                                <pre><code>SELECT YEAR(`date`) AS year, SUM(total_laid_off) AS total_laid_off FROM layoffs_cleaned GROUP BY YEAR(`date`) ORDER BY year DESC;</code></pre>
+                                            </li>
+                                            <li><strong>Analysing Monthly Layoffs:</strong> 
+                                                <pre><code>SELECT SUBSTRING(`date`, 1, 7) AS `month`, SUM(total_laid_off) AS total_laid_off FROM layoffs_cleaned GROUP BY `month` ORDER BY `month`;</code></pre>
+                                            </li>
+                                            <li><strong>CTE for Rolling Totals:</strong> 
+                                                <pre><code>WITH Rolling_Total AS (SELECT SUBSTRING(`date`, 1, 7) AS `month`, SUM(total_laid_off) AS total_off FROM layoffs_cleaned GROUP BY `month`) SELECT `month`, total_off, SUM(total_off) OVER (ORDER BY `month`) AS rolling_total FROM Rolling_Total;</code></pre>
+                                            </li>
+                                            <li><strong>Selecting Top 5 Companies with Highest Layoffs per Year:</strong> 
+                                                <pre><code>WITH Company_year AS (SELECT company, YEAR(`date`) AS year, SUM(total_laid_off) AS total_laid_off FROM layoffs_cleaned GROUP BY company, YEAR(`date`)) SELECT * FROM Company_year WHERE ranking <= 5;</code></pre>
+                                            </li>
+                                        </ol>
+                                        <strong><u>Output for Step 10:</u></strong><br>
+                                        <img src="sql_layoffs_eda.jpeg" alt="SQL EDA Result" style="max-width: 100%; height: auto;">									
+                                    </p>                                                   									
+                                    </p>
+									<p style="text-align: left;">
+											<strong><u>CONCLUDING REMARKS</u></strong><br>
+											This project is an extension to the <a href="sql_layoffs_clean.html" target="_blank" rel="noopener noreferrer">layoff data cleaning project in SQL.</a>     Completing this <strong>exploratory data analysis</strong> project deepened my understanding of using <strong>SQL</strong> for identifying <strong>patterns</strong> and <strong>trends</strong> in datasets. Through working with real-world data, I strengthened my ability to extract insights using <strong>aggregation functions</strong>, <strong>GROUP BY</strong>, and <strong>CTEs</strong> for rolling totals. This project also emphasised the importance of clean data, as it laid the foundation for reliable analysis. The skills I’ve developed in structuring and analysing data with SQL will help guide future <strong>data-driven decisions</strong> and more advanced analysis techniques.
+										</p>
+                                </p>
+								</section>
+
+					</div>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<section class="split contact">
+						<section class="alt">
+							<h3>Email</h3>
+							<p><a href="mailto:nirosan.vijayakumar@icloud.com">nirosan.vijayakumar@icloud.com<br><br></a></p>								
+						</section>
+						<section>
+							<h3>Phone</h3>
+							<p><a href="tel:+447930085562">+44 7930 085562</a></p>
+						</section>							
+					</section>
+					<section class="split contact">
+						<section class="alt">								
+							<h3>Address</h3>
+							<p>London,<br />
+							United Kingdom</p>
+						</section>
+						<section>
+							<h3>Socials</h3>
+							<ul class="icons alt">
+								<li><a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/tree/main" class="icon brands alt fa-github" target="_blank" rel="noopener noreferrer"><span class="label">GitHub</span></a></li>
+								<li><a href="https://www.linkedin.com/in/nirosan-v/" class="icon brands alt fa-linkedin" target="_blank" rel="noopener noreferrer"><span class="label">LinkedIn</span></a></li>
+							</ul>
+						</section>
+					</section>
+				</footer>
+
+			<!-- Copyright -->
+				<div id="copyright">
+					<ul><li> Nirosan Vijayakumar</li><li>Design adapted from: <a href="https://html5up.net" target="_blank" rel="noopener noreferrer">HTML5 UP</a></li></ul>
+				</div>
+
+		</div>
+
+	<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+</body>
+</html>

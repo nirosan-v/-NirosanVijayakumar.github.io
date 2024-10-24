@@ -1,0 +1,279 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Nirosan Vijayakumar | Project 2 - Airline Customer Data</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<div id="wrapper" class="fade-in">
+					<!-- Header -->
+					<div id="copyright">
+						<ul></ul>
+					</div>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li class="active"><a href="index.html">Home</a></li>
+							<li><a href="excel.html">Excel</a></li>
+                            <li><a href="sql.html">SQL</a></li>
+                            <li><a href="tableau.html">Tableau</a></li>
+                            <li><a href="python.html">Python</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/tree/main/LARGE-PROJECTS/Project%202" class="icon brands fa-github" target="_blank" rel="noopener noreferrer"><span class="label">GitHub</span></a></li>
+							<li><a href="https://www.linkedin.com/in/nirosan-v/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+                        <section class="post">
+                            <header class="major">
+                                <h1><span style="font-size: 0.85em;">Project 2</span> - <br />									
+                                Airline Customer Data</h1>
+                                <p style="text-align: left;"> <strong> Data Set:</strong> <a href="https://www.kaggle.com/datasets/edisugiarto/unclean-airline-customer-dataset" target="_blank" rel="noopener noreferrer">Press Here</a> <br>
+                                    <strong>GitHub File:</strong> <a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/blob/main/LARGE-PROJECTS/Project%202/airline_cleaning.sql" target="_blank" rel="noopener noreferrer">Press Here <br></a>
+                                    <strong>Tableau:</strong> <a href="https://public.tableau.com/views/AirlineCustomerData/Dashboard1?:language=en-GB&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener noreferrer">Press Here</a>
+                                    </a> </p>
+                                     </p>
+                                <p style="text-align: left;">
+                                    <strong><u>Overview:</u></strong><br>
+                                    This project involves the <strong>cleaning</strong> and <strong>preparation</strong> of an airline customer dataset using SQL, which consists of customer information and activity spanning up to 2014. Key attributes include membership details, geographical data, flight frequency, and revenue generation. The goal of this project was to <strong>standardise</strong> and <strong>clean</strong> the dataset by <strong>handling null values</strong>, <strong>removing unnecessary columns</strong>, <strong>adjusting data types</strong>, and ensuring <strong>consistency</strong> for further analysis in Tableau. This project is highly relevant for <strong>customer segmentation analysis</strong>, which can be used for <strong>customer lifetime value (CLV)</strong> and <strong>RFM analysis</strong> in the airline industry.<br>
+                                    <br>
+                                    <strong><u>Key Skills Used:</u></strong><br>
+                                    • <strong>SQL data manipulation:</strong> `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `ALTER TABLE`<br>
+                                    • <strong>Data cleaning:</strong> removing duplicates, handling NULL values, trimming whitespace<br>
+                                    • <strong>Data transformation:</strong> converting data types, handling dates, standardising values<br>
+                                    • <strong>Data validation:</strong> removing invalid records, conditional updates<br>
+                                    • <strong>Data visualisation:</strong> presenting data sets into impactful and comprehensible visualisations, creating dashboards<br><br>                              
+                             
+                                    <strong><u>Dataset Description:</u></strong><br>
+                                    The dataset features customer data and aggregated activity records up to 2014. Key attributes include inaugural flight date, membership tier, geographical location, flight frequency, and revenue generated within the previous year window and subsequent year window. Several rows contain <u>invalid data, null values</u>, and unnecessary columns that need to be cleaned to ensure accurate analysis. <br>
+                                    <br>                                    
+                
+                                    <strong><u>Why This Project is Worth Doing:</u></strong><br>
+                                    This project highlights essential SQL data cleaning skills critical for analysing flight data. By ensuring the accuracy, consistency, and relevance of customer and activity records, the project lays the groundwork for meaningful insights and visualisations. Additionally, it addresses the complexities of handling real-world messy data, which is pivotal before progressing to visual analysis in Tableau. <br>
+                                    <br>    
+                                    <strong><u>Step-by-Step Guide for Data Cleaning:</u></strong>
+                                    <ol style="text-align: left">
+                                        <li><strong>Selecting All Records from the Raw Airline Data:</strong> 
+                                            <pre><code>SELECT * FROM airline_data_raw;</code></pre>
+                                        </li>
+                                        
+                                        <li><strong>Creating a Staging Table:</strong> 
+                                            <pre><code>CREATE TABLE airline_staged LIKE airline_data_raw;</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Copying Data to the Staging Table:</strong> 
+                                            <pre><code>INSERT INTO airline_staged SELECT * FROM airline_data_raw;</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Dropping Unnecessary Columns:</strong> 
+                                            <pre><code>ALTER TABLE airline_staged DROP COLUMN WORK_CITY;</code></pre>
+                                            <pre><code>ALTER TABLE airline_staged DROP COLUMN LOAD_TIME;</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Displaying the Contents of the Staging Table:</strong> 
+                                            <pre><code>SELECT * FROM airline_staged;</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Trimming Whitespace from Specified Columns:</strong> 
+                                            <pre><code>UPDATE airline_staged SET 
+                                                MEMBER_NO = TRIM(MEMBER_NO),
+                                                FFP_DATE = TRIM(FFP_DATE),
+                                                FIRST_FLIGHT_DATE = TRIM(FIRST_FLIGHT_DATE),
+                                                GENDER = TRIM(GENDER),
+                                                FFP_TIER = TRIM(FFP_TIER),
+                                                WORK_PROVINCE = TRIM(WORK_PROVINCE),
+                                                WORK_COUNTRY = TRIM(WORK_COUNTRY),
+                                                AGE = TRIM(AGE),
+                                                FLIGHT_COUNT = TRIM(FLIGHT_COUNT),
+                                                BP_SUM = TRIM(BP_SUM),
+                                                SUM_YR_1 = TRIM(SUM_YR_1),
+                                                SUM_YR_2 = TRIM(SUM_YR_2),
+                                                SEG_KM_SUM = TRIM(SEG_KM_SUM),
+                                                LAST_FLIGHT_DATE = TRIM(LAST_FLIGHT_DATE),
+                                                LAST_TO_END = TRIM(LAST_TO_END),
+                                                AVG_INTERVAL = TRIM(AVG_INTERVAL),
+                                                MAX_INTERVAL = TRIM(MAX_INTERVAL),
+                                                EXCHANGE_COUNT = TRIM(EXCHANGE_COUNT),
+                                                avg_discount = TRIM(avg_discount),
+                                                Points_Sum = TRIM(Points_Sum),
+                                                Point_NotFlight = TRIM(Point_NotFlight);</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Displaying the Contents After Trimming:</strong> 
+                                            <pre><code>SELECT * FROM airline_staged;</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Removing Rows with Unwanted Symbols:</strong> 
+                                            <pre><code>DELETE FROM airline_staged WHERE WORK_PROVINCE REGEXP "[0-9#\\-\\*\\.,!]";</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Removing Rows with Empty or Null Critical Fields:</strong> 
+                                            <pre><code>DELETE FROM airline_staged WHERE 
+                                                TRIM(MEMBER_NO) = '' OR MEMBER_NO IS NULL OR
+                                                TRIM(FFP_DATE) = '' OR FFP_DATE IS NULL OR
+                                                TRIM(FIRST_FLIGHT_DATE) = '' OR FIRST_FLIGHT_DATE IS NULL OR
+                                                TRIM(GENDER) = '' OR GENDER IS NULL OR
+                                                TRIM(FFP_TIER) = '' OR FFP_TIER IS NULL OR
+                                                TRIM(WORK_PROVINCE) = '' OR WORK_PROVINCE IS NULL OR
+                                                TRIM(WORK_COUNTRY) = '' OR WORK_COUNTRY IS NULL OR
+                                                TRIM(AGE) = '' OR AGE IS NULL OR
+                                                TRIM(FLIGHT_COUNT) = '' OR FLIGHT_COUNT IS NULL OR
+                                                TRIM(BP_SUM) = '' OR BP_SUM IS NULL OR
+                                                TRIM(SUM_YR_1) = '' OR SUM_YR_1 IS NULL OR
+                                                TRIM(SUM_YR_2) = '' OR SUM_YR_2 IS NULL OR
+                                                TRIM(SEG_KM_SUM) = '' OR SEG_KM_SUM IS NULL OR
+                                                TRIM(LAST_FLIGHT_DATE) = '' OR LAST_FLIGHT_DATE IS NULL OR
+                                                TRIM(LAST_TO_END) = '' OR LAST_TO_END IS NULL OR
+                                                TRIM(AVG_INTERVAL) = '' OR AVG_INTERVAL IS NULL OR
+                                                TRIM(MAX_INTERVAL) = '' OR MAX_INTERVAL IS NULL OR
+                                                TRIM(EXCHANGE_COUNT) = '' OR EXCHANGE_COUNT IS NULL OR
+                                                TRIM(avg_discount) = '' OR avg_discount IS NULL OR
+                                                TRIM(Points_Sum) = '' OR Points_Sum IS NULL OR
+                                                TRIM(Point_NotFlight) = '' OR Point_NotFlight IS NULL;</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Removing Rows with Unwanted Characters in WORK_PROVINCE:</strong> 
+                                            <pre><code>DELETE FROM airline_staged WHERE WORK_PROVINCE REGEXP '[^A-Z ]';</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Replacing Invalid Data with NULL in AGE:</strong> 
+                                            <pre><code>UPDATE airline_staged SET AGE = NULL WHERE AGE < 0 OR AGE > 100;</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Converting WORK_PROVINCE Values to Uppercase for Consistency:</strong> 
+                                            <pre><code>UPDATE airline_staged SET WORK_PROVINCE = UPPER(WORK_PROVINCE);</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Removing Invalid Date Records:</strong> 
+                                            <pre><code>DELETE FROM airline_staged WHERE LAST_FLIGHT_DATE LIKE '%2014/2/29%';</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Converting Date Columns to Proper Format:</strong> 
+                                            <pre><code>UPDATE airline_staged SET 
+                                                FFP_DATE = STR_TO_DATE(FFP_DATE, '%m/%d/%Y'),
+                                                FIRST_FLIGHT_DATE = STR_TO_DATE(FIRST_FLIGHT_DATE, '%m/%d/%Y'),
+                                                LAST_FLIGHT_DATE = STR_TO_DATE(LAST_FLIGHT_DATE, '%m/%d/%Y');</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Modifying Data Types of Specific Columns:</strong> 
+                                            <pre><code>ALTER TABLE airline_staged MODIFY COLUMN FFP_DATE DATE,
+                                                MODIFY COLUMN FIRST_FLIGHT_DATE DATE,
+                                                MODIFY COLUMN LAST_FLIGHT_DATE DATE,
+                                                MODIFY COLUMN AGE INT,
+                                                MODIFY COLUMN SUM_YR_1 INT,
+                                                MODIFY COLUMN SUM_YR_2 INT,
+                                                MODIFY COLUMN avg_discount DECIMAL(10, 5),
+                                                MODIFY COLUMN avg_interval DECIMAL(10, 5);</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Displaying the Final Contents of the Staging Table:</strong> 
+                                            <pre><code>SELECT * FROM airline_staged;</code></pre>
+                                        </li>
+                                    
+                                        <li><strong>Final Check of Raw and Staged Data:</strong> 
+                                            <pre><code>SELECT * FROM airline_data_raw;</code></pre>
+                                        </li>
+                                    </ol>                                    
+                                        </ul>
+                                    </ol>                                                                
+                                    </ol>
+                                    <strong><u>Initial Dataset:</u></strong><br>
+                                    <img src="project_two_intial.jpeg" alt="Project_two Data Cleaning Inital" style="max-width: 100%; height: auto;">    
+                                    <strong><u>Final Result:</u></strong><br>
+                                    <img src="project_two_clean.jpeg" alt="Project_one Data Clean" style="max-width: 100%; height: auto;">
+                                    </p>
+
+                                    <p style="text-align:left;">
+                                        <span style="font-size: 30px;"><strong><u>Tableau</u></strong><br></span>
+                                        Now that the flight dataset has been thoroughly cleaned and prepared, it is ready for visualisation. By building an interactive dashboard, we can effectively explore and highlight the relationships between key metrics such as flight frequency, customer age groups and genders and geographic distribution. The following five visualisations have been created:
+                                        <br>
+                                        <br>
+                                        <strong><u>Visualisations:</u></strong><br>
+                                        <strong>1. Activity by Province:</strong> A heat map showing provinces with the highest flight activity. Larger bubbles represent more flights, making it easy to spot high-traffic regions. This can help identify regional demand for flights.<br>                                    
+                                        <strong>2. Flight count by Age Group:</strong> A pie chart breaking down flight activity by age group. This helps reveal which age demographics travel the most, providing insights into customer behaviour across different life stages.<br>                                        
+                                        <strong>3. Flight count by Gender:</strong> A sideways bar graph comparing flight counts between males and females. This visualisation offers a clear view of gender-based travel patterns.<br>                                        
+                                        <strong>4. Flight count by Gender and Age Group:</strong> Expands the previous visualisation by further breaking down flight counts by age group, giving a deeper look into gender and age-related trends.<br>                                        
+                                        <strong>5. Flight Activity Trends Over Time:</strong> A line chart tracking flight counts over time by first flight year. This visualisation shows when different groups first started flying and highlights trends in flight activity over the years, helping identify travel preferences, economic factors affecting flight decisions and the success of promotions aimed at first-time flyers.<br>
+                                         </p>
+
+                                     <strong><u>Dashboard:</u></strong><br>
+                                     <div class='tableauPlaceholder' id='viz1729777372979' style='position: relative'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ai&#47;AirlineCustomerData&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='AirlineCustomerData&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ai&#47;AirlineCustomerData&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-GB' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1729777372979');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else { vizElement.style.width='100%';vizElement.style.height='1327px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                                     
+
+                                        <p style="text-align:left;">
+                                        <strong><u>CONCLUDING REMARKS</u></strong><br>
+                                        This project has been a pivotal experience in applying my <strong>SQL data manipulation</strong> skills, particularly in <strong>data cleaning</strong> and <strong>visualisation</strong>. By effectively handling <strong>missing values</strong>, <strong>invalid records</strong>, and <strong>unnecessary columns</strong>, I showcased my <strong>keen attention to detail</strong> and commitment to <strong>data integrity</strong>, which are essential qualities for any data analyst. This experience reinforced my understanding of the importance of having clean, accurate data for <strong>reliable analysis</strong>. The process of visualising flight trends and customer demographics in Tableau has enhanced my ability to present complex information in an accessible manner, allowing stakeholders to make informed decisions based on clear, actionable insights.<br>
+                                        <br>
+                                        Understanding the nuances of flight activity among different age groups and genders has further illustrated my capability to analyse <strong>customer behaviour</strong>, which is vital for roles focused on <strong>customer segmentation</strong> and <strong>targeting</strong>. As I continue to refine my <strong>analytical</strong> and <strong>storytelling skills</strong>, I am eager to leverage these experiences in a professional setting, driving impactful decisions through data analysis. This project highlights my <strong>technical expertise</strong> and <strong>problem-solving abilities</strong> in transforming data into actionable insights.                                        
+                                </p>                                                   
+                                </p>
+                            </section>
+
+                </div>
+
+						<!-- Post -->
+                        
+
+				<!-- Footer -->
+				<footer id="footer">
+					<section class="split contact">
+						<section class="alt">
+							<h3>Email</h3>
+							<p><a href="mailto:nirosan.vijayakumar@icloud.com">nirosan.vijayakumar@icloud.com<br><br></a></p>								
+						</section>
+						<section>
+							<h3>Phone</h3>
+							<p><a href="tel:+447930085562">+44 7930 085562</a></p>
+						</section>							
+					</section>
+					<section class="split contact">
+						<section class="alt">								
+							<h3>Address</h3>
+							<p>London,<br />
+							United Kingdom</p>
+						</section>
+						<section>
+							<h3>Socials</h3>
+							<ul class="icons alt">
+								<li><a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/tree/main" class="icon brands alt fa-github" target="_blank" rel="noopener noreferrer"><span class="label">GitHub</span></a></li>
+								<li><a href="https://www.linkedin.com/in/nirosan-v/" class="icon brands alt fa-linkedin" target="_blank" rel="noopener noreferrer"><span class="label">LinkedIn</span></a></li>
+							</ul>
+						</section>
+					</section>
+				</footer>
+
+			<!-- Copyright -->
+				<div id="copyright">
+					<ul><li> Nirosan Vijayakumar</li><li>Design adapted from: <a href="https://html5up.net" target="_blank" rel="noopener noreferrer">HTML5 UP</a></li></ul>
+				</div>
+
+		</div>
+
+	<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+</body>
+</html>

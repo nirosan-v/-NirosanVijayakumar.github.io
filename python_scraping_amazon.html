@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Nirosan Vijayakumar | Python - Data Scraping: Amazon</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<div id="wrapper" class="fade-in">
+					<!-- Header -->
+					<div id="copyright">
+						<ul></ul>
+					</div>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="excel.html">Excel</a></li>
+                            <li><a href="sql.html">SQL</a></li>
+                            <li><a href="tableau.html">Tableau</a></li>
+                            <li class="active"><a href="python.html">Python</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/tree/main" class="icon brands fa-github" target="_blank" rel="noopener noreferrer"><span class="label">GitHub</span></a></li>
+							<li><a href="https://www.linkedin.com/in/nirosan-v/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1><span style="font-size: 0.85em;">Data Scraping</span> - <br />	
+									Amazon Page</h1>
+                                    <p style="text-align: left;"> <strong> Amazon Page:</strong> <a href="https://www.amazon.co.uk/Funny-Data-Systems-Business-Analyst/dp/B0C4QJRSKS/ref=sr_1_2?crid=16WD90LBA52XP&dib=eyJ2IjoiMSJ9.pHZa8fK9iC7Su4-_zcK9aT0RzEelwcoIIFC4nELgjGkBlcm5Xns4ri_ifQwiLFEXfHwEUFCKxOKpc1ZBAAJ3dgCU6PmoGLLzxP7_6zyzrHmiiKM1UHyuUO5WIdh4fXOr1Dzm5kU4ucKypTRfsO-kE6yOYMahOrMvO2mxNWvz9ogMHU2KZlC2hi-Y-qRZFwkUUr6OLNnraKRPOjVVL4vM947MSZ4L1dlhRnTwt4MUBCPqz5tEjW9p0STRU3QIWX9CuhhqrA0WGehuPIGaGsoCDfENFTWJWgUv4E_uYTJypyk.RP2zPoYS2Wa53pRKu7bYXuMgoHlfsYFO5_dO4lSDzn4&dib_tag=se&keywords=funny+got+data+mis+data+systems+business+analyst+shirt&qid=1728223366&sprefix=funny+got+data+mis+data+systems+business+analyst+shir%2Caps%2C105&sr=8-2" target="_blank" rel="noopener noreferrer">Press Here</a> <br>
+										<strong>GitHub File:</strong> <a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/blob/main/Python/data_scraping_amazon.py" target="_blank" rel="noopener noreferrer">Press Here</a>
+                                        <p style="text-align: left;"> <strong><u>Overview:</u></strong><br>
+                                            This project demonstrates a dynamic <strong>Amazon product price tracker</strong> built with Python. The web scraper connects to a specific product page, extracts the title and price, and automatically updates the data in a CSV file on a daily basis. The automation process highlights skills in web scraping, data cleaning, and process automation using Python.
+                                        </p>
+                                        <p style="text-align: left;"> <strong><u>Key Skills Used:</u></strong><br>
+                                            • <strong>Web Scraping:</strong> Extracting data from websites using Python’s <strong>BeautifulSoup</strong> and <strong>requests</strong> libraries<br>
+                                            • <strong>Data Cleaning:</strong> Cleaning and formatting product titles and prices for consistency<br>
+                                            • <strong>Automation:</strong> Running price checks daily using a <strong>while loop</strong> and <strong>time.sleep</strong> for process automation<br>
+                                            • <strong>CSV File Handling:</strong> Writing and appending data to CSV files using Python’s <strong>csv</strong> library
+                                        </p>
+                                        <p style="text-align: left;"> <strong><u>Code Description:</u></strong><br>
+                                            The code extracts product titles and prices from an Amazon product page and automates the process of tracking these prices over time. It saves the data to a CSV file, making it ideal for price analysis, trend monitoring, and building future dashboards. This project automates the entire scraping and tracking process to run once every 24 hours.
+                                        </p>
+                                        <p style="text-align: left;">
+                                            <strong><u>Why This Project is Worth Doing:</u></strong><br>
+                                            • Web scraping is a key skill for data analysts to gather valuable data from the web<br>
+                                            • The project demonstrates the practical application of Python for real-time data extraction and monitoring<br>
+                                            • Automating tasks like price tracking is useful for businesses and data analysts to monitor pricing trends<br>
+                                        </p>
+                                        <p style="text-align: left;">
+                                            <strong><u>Step-by-Step Guide for Web Scraping:</u></strong>
+                                            <ol style="text-align: left;">
+                                                <li><strong>Connect to Amazon:</strong> Use <strong>requests</strong> to pull HTML content from the Amazon product page</li>
+                                                <li><strong>Extract Product Title & Price:</strong> Use <strong>BeautifulSoup</strong> to find and clean the product title and price</li>
+                                                <li><strong>Automate Daily Price Check:</strong> Automate the script to run once every 24 hours and store updated price data</li>
+                                                <li><strong>Store Data:</strong> Write and append the data to a CSV file for future analysis</li>
+                                            </ol>
+                                        </p>
+
+                                    <p style="text-align: center;">
+                                        <strong><u>Initial Webpage:</u></strong><br>
+                                        <img src="python_scrapping_amazon_intial.jpeg" alt="Initial Scraped Webpage" style="max-width: 100%; height: auto;">                             
+                                        <strong><u>Extracted Data (ongoing):</u></strong><br>
+                                        <img src="python_scraping_amazon_csv.jpeg" alt="Finished CSV File" style="max-width: 100%; height: auto;"> 
+                                    </p>
+									<p style="text-align:left;">
+										<strong><u>CONCLUDING REMARKS</u></strong><br>
+										This project significantly enhanced my ability to apply <strong>web scraping techniques</strong> in Python using <strong>BeautifulSoup</strong> and <strong>requests</strong>. It demonstrated how to automate data extraction processes and ensure that the extracted data can be stored and analysed in real-time. Building the <strong>Amazon price tracker</strong> deepened my understanding of handling <strong>dynamic web data</strong>, automating repetitive tasks, and ensuring data consistency. The experience gained from this project is valuable for developing efficient methods of collecting data from online sources, which is an essential skill for any data analyst or business seeking to leverage real-time data for informed decision-making.
+									</p>
+                                </div>
+
+				<!-- Footer -->
+				<footer id="footer">
+					<section class="split contact">
+						<section class="alt">
+							<h3>Email</h3>
+							<p><a href="mailto:nirosan.vijayakumar@icloud.com">nirosan.vijayakumar@icloud.com<br><br></a></p>								
+						</section>
+						<section>
+							<h3>Phone</h3>
+							<p><a href="tel:+447930085562">+44 7930 085562</a></p>
+						</section>							
+					</section>
+					<section class="split contact">
+						<section class="alt">								
+							<h3>Address</h3>
+							<p>London,<br />
+							United Kingdom</p>
+						</section>
+						<section>
+							<h3>Socials</h3>
+							<ul class="icons alt">
+								<li><a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/tree/main" class="icon brands alt fa-github" target="_blank" rel="noopener noreferrer"><span class="label">GitHub</span></a></li>
+								<li><a href="https://www.linkedin.com/in/nirosan-v/" class="icon brands alt fa-linkedin" target="_blank" rel="noopener noreferrer"><span class="label">LinkedIn</span></a></li>
+							</ul>
+						</section>
+					</section>
+				</footer>
+
+			<!-- Copyright -->
+				<div id="copyright">
+					<ul><li> Nirosan Vijayakumar</li><li>Design adapted from: <a href="https://html5up.net" target="_blank" rel="noopener noreferrer">HTML5 UP</a></li></ul>
+				</div>
+
+		</div>
+
+	<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+</body>
+</html>

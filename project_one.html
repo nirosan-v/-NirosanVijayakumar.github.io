@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Nirosan Vijayakumar | Project 1 - London Job data</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<div id="wrapper" class="fade-in">
+					<!-- Header -->
+					<div id="copyright">
+						<ul></ul>
+					</div>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li class="active"><a href="index.html">Home</a></li>
+							<li><a href="excel.html">Excel</a></li>
+                            <li><a href="sql.html">SQL</a></li>
+                            <li><a href="tableau.html">Tableau</a></li>
+                            <li><a href="python.html">Python</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/tree/main/LARGE-PROJECTS/Project%201" class="icon brands fa-github" target="_blank" rel="noopener noreferrer"><span class="label">GitHub</span></a></li>
+							<li><a href="https://www.linkedin.com/in/nirosan-v/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+                        <section class="post">
+                            <header class="major">
+                                <h1><span style="font-size: 0.85em;">Project 1</span> - <br />									
+                                London Job Data</h1>
+                                <p style="text-align: left;"> <strong> Data Set:</strong> <a href="https://www.kaggle.com/datasets/justinas/housing-in-london?select=housing_in_london_monthly_variables.csv" target="_blank" rel="noopener noreferrer">Press Here</a> <br>
+                                    <strong>GitHub File:</strong> <a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/blob/main/LARGE-PROJECTS/Project%201/london_job_data.sql" target="_blank" rel="noopener noreferrer">Press Here <br></a>
+                                        <strong>Tableau:</strong> <a href="https://public.tableau.com/views/LondonJobData/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener noreferrer">Press Here</a>
+                                    </a> </p>
+                                     </p>
+                                <p style="text-align: left;">
+                                    <strong><u>Overview:</u></strong><br>
+                                    This project focuses on cleaning a raw population dataset using SQL, removing irrelevant data, handling null values, converting data types, and preparing it for further analysis and visualisation in Tableau. The reason to pursue this project is to observe the relationship between population and several job factors. <br>
+                                    <br>
+                                    <strong><u>Key Skills Used:</u></strong><br>
+                                    • <strong>SQL data manipulation:</strong> `SELECT`, `UPDATE`, `DELETE`, `ALTER TABLE`, `JOIN`<br>
+                                    • <strong>Data cleaning:</strong> removing duplicates, handling NULL values<br>
+                                    • <strong>Data transformation:</strong> converting data types, handling dates, standardising values<br>
+                                    • <strong>Data visualisation:</strong> presenting data sets into easy-to-comprehend visualisations<br>
+                                    <br>
+                             
+                                    <strong><u>Dataset Description:</u></strong><br>
+                                    The dataset contains London population data with various columns such as median salary, mean salary, population size, recycling percentage, and number of jobs. Several rows include <u>invalid data, null values</u> and non-borough regions, which need to be filtered out to ensure accurate analysis. <br>
+                                    <br>
+                
+                                    <strong><u>Why This Project is Worth Doing:</u></strong><br>
+                                    This project demonstrates essential SQL data cleaning skills required for data analysis. Cleaning data ensures accuracy, consistency, and relevance in datasets, which is crucial when preparing data for meaningful insights and visualisation. Additionally, it demonstrates handling real-world messy data before moving to visual analysis in Tableau.
+                                    <br>
+                                    <br>
+                
+                                    <strong><u>Step-by-Step Guide for Data Cleaning:</u></strong>
+                                    <ol style="text-align: left">
+                                            <li><strong>Inspecting the Original Dataset:</strong> 
+                                                <pre><code>SELECT * FROM yearly_housing_raw;</code></pre>
+                                            </li>
+                                            
+                                            <li><strong>Creating a Cleaned Table:</strong> 
+                                                <pre><code>CREATE TABLE cleaned_housing_data AS SELECT * FROM yearly_housing_raw;</code></pre>
+                                            </li>
+                                            
+                                            <li><strong>Removing Unnecessary Columns:</strong> 
+                                                <pre><code>ALTER TABLE cleaned_housing_data DROP COLUMN no_of_houses, DROP COLUMN area_size, DROP COLUMN life_satisfaction;</code></pre>
+                                            </li>
+                        
+                                            <li><strong>Replacing Invalid Data in Mean Salary and Recycling Percentage:</strong> 
+                                                <pre><code>UPDATE cleaned_housing_data SET mean_salary = NULL WHERE mean_salary = '-' OR mean_salary = '#';</code></pre>
+                                                <pre><code>UPDATE cleaned_housing_data SET recycling_pct = NULL WHERE recycling_pct = '' OR recycling_pct = 'na';</code></pre>
+                                            </li>
+                        
+                                            <li><strong>Removing Rows with Null Salary Fields:</strong> 
+                                                <pre><code>DELETE FROM cleaned_housing_data WHERE median_salary IS NULL AND mean_salary IS NULL;</code></pre>
+                                            </li>
+                        
+                                            <li><strong>Identifying Non-Numeric Values:</strong> 
+                                                <pre><code>SELECT * FROM cleaned_housing_data WHERE median_salary NOT REGEXP '^[0-9]+(\.[0-9]+)?$' OR mean_salary NOT REGEXP '^[0-9]+(\.[0-9]+)?$' OR recycling_pct NOT REGEXP '^[0-9]+(\.[0-9]+)?$';</code></pre>
+                                            </li>
+                        
+                                            <li><strong>Replacing Non-Numeric Salary and Recycling Values with NULL:</strong> 
+                                                <pre><code>UPDATE cleaned_housing_data SET median_salary = NULL WHERE median_salary NOT REGEXP '^[0-9]+(\.[0-9]+)?$';</code></pre>
+                                                <pre><code>UPDATE cleaned_housing_data SET mean_salary = NULL WHERE mean_salary NOT REGEXP '^[0-9]+(\.[0-9]+)?$';</code></pre>
+                                                <pre><code>UPDATE cleaned_housing_data SET recycling_pct = NULL WHERE recycling_pct NOT REGEXP '^[0-9]+(\.[0-9]+)?$';</code></pre>
+                                            </li>
+                        
+                                            <li><strong>Converting Salary and Recycling Columns to Numeric Types:</strong> 
+                                                <pre><code>ALTER TABLE cleaned_housing_data MODIFY median_salary DECIMAL(10, 2), MODIFY mean_salary DECIMAL(10, 2), MODIFY recycling_pct DECIMAL(5, 2);</code></pre>
+                                            </li>
+                        
+                                            <li><strong>Converting Date Column to DATE Format:</strong> 
+                                                <pre><code>ALTER TABLE cleaned_housing_data MODIFY COLUMN date DATE;</code></pre>
+                                                <pre><code>UPDATE cleaned_housing_data SET date = STR_TO_DATE(date, '%Y-%m-%d');</code></pre>
+                                            </li>
+                        
+                                            <li><strong>Adding Auto-Incremented ID for Duplicate Management:</strong> 
+                                                <pre><code>ALTER TABLE cleaned_housing_data ADD COLUMN id INT AUTO_INCREMENT PRIMARY KEY;</code></pre>
+                                            </li>
+                        
+                                            <li><strong>Removing Duplicate Rows:</strong> 
+                                                <pre><code>DELETE t1 FROM cleaned_housing_data t1 JOIN cleaned_housing_data t2 ON t1.code = t2.code AND t1.date = t2.date AND t1.id > t2.id;</code></pre>
+                                            </li>
+                        
+                                            <li><strong>Removing Non-Borough Regions:</strong> 
+                                                <pre><code>DELETE FROM cleaned_housing_data WHERE area IN ('england', 'scotland', 'wales', 'northern ireland', 'united kingdom', 'great britain', 'england and wales', 'inner london', 'outer london');</code></pre>
+                                            </li>
+                        
+                                            <li><strong>Trimming Spaces and Standardising Area Names:</strong> 
+                                                <pre><code>UPDATE cleaned_housing_data SET area = TRIM(LOWER(area));</code></pre>
+                                            </li>
+                        
+                                            <li><strong>Removing Rows with Missing or Non-Meaningful Data:</strong> 
+                                                <pre><code>DELETE FROM cleaned_housing_data WHERE median_salary IS NULL OR mean_salary IS NULL OR population_size IS NULL;</code></pre>
+                                            </li>
+                        
+                                            <li><strong>Converting Salary Columns to Integers for Visualisation:</strong> 
+                                                <pre><code>ALTER TABLE cleaned_housing_data MODIFY COLUMN median_salary INT;</code></pre>
+                                                <pre><code>ALTER TABLE cleaned_housing_data MODIFY COLUMN mean_salary INT;</code></pre>
+                                            </li>
+            
+                                            <li><strong>Final Check of Distinct Areas:</strong> 
+                                                <pre><code>SELECT DISTINCT area FROM cleaned_housing_data;</code></pre>
+                                            </li>
+                                            <li><strong>Final Check of Cleaned Dataset:</strong> 
+                                                <pre><code>SELECT * FROM cleaned_housing_data;</code></pre>
+                                            </li>
+                                        </p>
+                                        </ul>
+                                    </ol>                                                                
+                                    </ol>
+                                    <strong><u>Initial Dataset:</u></strong><br>
+                                    <img src="project_one_raw.jpeg" alt="Project_one Data Cleaning Raw" style="max-width: 100%; height: auto;">    
+                                    <strong><u>Final Result:</u></strong><br>
+                                    <img src="project_one_after.jpeg" alt="Project_one Data Clean" style="max-width: 100%; height: auto;">                                    
+                                    </p>
+
+                                    <p style="text-align:left;">
+                                        <span style="font-size: 30px;"><strong><u>Tableau</u></strong><br></span>
+                                        Now that the dataset has been thoroughly cleaned and prepared, it is ready for visualisation. By building an interactive dashboard, we can effectively explore and highlight the relationships between key metrics such as the number of jobs, salaries and population size. The following four visualisations have been created: <br><br>
+                                        <strong><u>Visualisations:</u></strong><br>
+                                        <strong>1. Jobs vs Population Size:</strong> This visualisation compares the average number of jobs available in each area with the population size, represented by a black line. The areas are colour-coded to indicate how well they provide jobs relative to their population, offering insight into employment opportunities for residents. <br>
+                                        <strong>2. Population vs Jobs Ratio:</strong> This table highlights the ratio of jobs available to the population size in each area. It calculates the jobs-to-population ratio and ranks areas accordingly, providing a clear view of employment density and opportunities across regions. <br>
+                                        <strong>3. Trend in Median Salary Over Time:</strong> This line chart visualises the upward trend of median salaries over the years, providing insights into how income levels have changed across different regions and time periods. It helps identify economic growth and salary progression in the population. <br>
+                                        <strong>4. Average Salary vs Recycling Percentage:</strong> This dual-line graph compares the average salary and recycling percentage over time. It allows for the observation of any potential relationship between income levels and recycling habits, helping to determine if higher-income areas tend to recycle more effectively or not. 
+                                        <br>
+                                     </p>
+
+                                     <strong><u>Dashboard:</u></strong><br>
+                                     <div class='tableauPlaceholder' id='viz1729718437941' style='position: relative'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Lo&#47;LondonJobData&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='LondonJobData&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Lo&#47;LondonJobData&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-GB' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1729718437941');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else { vizElement.style.width='100%';vizElement.style.height='1227px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                                     
+
+                                        <p style="text-align:left;">
+                                        <strong><u>CONCLUDING REMARKS</u></strong><br>
+                                        This project has been a pivotal experience in applying my <strong>SQL data manipulation</strong> skills, particularly in <strong>data cleaning</strong> and <strong>transformation</strong>. By addressing issues such as <strong>missing values</strong> and <strong>duplicates</strong>, I learned the importance of ensuring data integrity for reliable analysis, requiring strong <strong>attention to detail</strong>. The process of visualising the relationships between <strong>jobs, salaries, and population</strong> size in Tableau has enhanced my understanding of effective data presentation. For instance, the correlation between average salary and recycling percentage suggests socio-economic patterns worth exploring. <br>  <br>As a starting point in my data analysis journey, I recognise that with each project, my skills in <strong>data visualisation</strong> and <strong>storytelling through data</strong> will improve. I look forward to leveraging these experiences to extract meaningful insights that drive decision-making in future analyses.
+                                    </p>
+                                </p>                                                   
+                                </p>
+                            </section>
+
+                </div>
+
+						<!-- Post -->
+                        
+
+				<!-- Footer -->
+				<footer id="footer">
+					<section class="split contact">
+						<section class="alt">
+							<h3>Email</h3>
+							<p><a href="mailto:nirosan.vijayakumar@icloud.com">nirosan.vijayakumar@icloud.com<br><br></a></p>								
+						</section>
+						<section>
+							<h3>Phone</h3>
+							<p><a href="tel:+447930085562">+44 7930 085562</a></p>
+						</section>							
+					</section>
+					<section class="split contact">
+						<section class="alt">								
+							<h3>Address</h3>
+							<p>London,<br />
+							United Kingdom</p>
+						</section>
+						<section>
+							<h3>Socials</h3>
+							<ul class="icons alt">
+								<li><a href="https://github.com/nirosan-v/Data-Analysis-Portfolio/tree/main" class="icon brands alt fa-github" target="_blank" rel="noopener noreferrer"><span class="label">GitHub</span></a></li>
+								<li><a href="https://www.linkedin.com/in/nirosan-v/" class="icon brands alt fa-linkedin" target="_blank" rel="noopener noreferrer"><span class="label">LinkedIn</span></a></li>
+							</ul>
+						</section>
+					</section>
+				</footer>
+
+			<!-- Copyright -->
+				<div id="copyright">
+					<ul><li> Nirosan Vijayakumar</li><li>Design adapted from: <a href="https://html5up.net" target="_blank" rel="noopener noreferrer">HTML5 UP</a></li></ul>
+				</div>
+
+		</div>
+
+	<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+</body>
+</html>
